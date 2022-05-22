@@ -10,15 +10,32 @@ This is the re-implemented code following The [Flask Mega-Tutorial](https://blog
 ## Structure
 
 ## Run
-Start `flask` server:
+#### 1. Start `flask` server:
 ```shell
 export FLASK_APP=./microblog.py
 flask run
 ```
 
-Update database structure:
+#### 2. Update database structure:
 ```shell
 export FLASK_APP=./microblog.py
 flask db migrate
 flask db upgrade
+```
+
+#### 3. Use temporary debug email server:
+```shell
+python -m smtpd -n -c DebuggingServer localhost:8025
+```
+Then set up temporary server and start `flask`
+```shell
+export MAIL_SERVER=localhost
+export MAIL_PORT=8025
+export FLASK_APP=./microblog.py
+flask run
+```
+
+#### 4. Run unit test:
+```shell
+python tests.py
 ```
